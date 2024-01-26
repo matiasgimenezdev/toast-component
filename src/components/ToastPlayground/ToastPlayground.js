@@ -9,8 +9,7 @@ const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 function ToastPlayground() {
 	const [message, setMessage] = useState('');
 	const [variant, setVariant] = useState(VARIANT_OPTIONS[0]);
-	const { createToast, dismissToast, dismissAllToasts } =
-		useContext(ToastContext);
+	const { createToast } = useContext(ToastContext);
 
 	function handleSubmit(event) {
 		event.preventDefault();
@@ -25,12 +24,7 @@ function ToastPlayground() {
 				<img alt='Cute toast mascot' src='/toast.png' />
 				<h1>Toast Playground</h1>
 			</header>
-			<ToastShelf
-				handleDismiss={(id) => dismissToast(id)}
-				handleDismissAll={() => {
-					dismissAllToasts();
-				}}
-			/>
+			<ToastShelf />
 			<form onSubmit={handleSubmit} className={styles.controlsWrapper}>
 				<div className={styles.row}>
 					<label

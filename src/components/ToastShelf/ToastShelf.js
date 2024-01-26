@@ -4,13 +4,13 @@ import Toast from '../Toast';
 import styles from './ToastShelf.module.css';
 import { ToastContext } from '../ToastProvider';
 
-function ToastShelf({ handleDismiss, handleDismissAll }) {
-	const { toasts } = useContext(ToastContext);
+function ToastShelf() {
+	const { toasts, dismissAllToasts } = useContext(ToastContext);
 
 	useEffect(() => {
 		function handleKeyDown(event) {
 			if (event.key !== 'Escape') return;
-			handleDismissAll();
+			dismissAllToasts();
 		}
 
 		document.addEventListener('keydown', handleKeyDown);
@@ -18,18 +18,14 @@ function ToastShelf({ handleDismiss, handleDismissAll }) {
 		return () => {
 			document.removeEventListener('keyup', handleKeyDown);
 		};
-	}, [handleDismissAll]);
+	}, [dismissAllToasts]);
 
 	return (
 		<ol className={styles.wrapper}>
 			{toasts.map(({ id, message, variant }) => {
 				return (
 					<li className={styles.toastWrapper} key={id}>
-						<Toast
-							variant={variant}
-							handleDismiss={handleDismiss}
-							toastId={id}
-						>
+						<Toast variant={variant} toastId={id}>
 							{message}
 						</Toast>
 					</li>
