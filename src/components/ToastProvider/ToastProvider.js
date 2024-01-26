@@ -1,9 +1,16 @@
 import { createContext, useCallback, useMemo, useState } from 'react';
+import useKeyDown from '../../hooks/useKeyDown';
 
 export const ToastContext = createContext();
 
 function ToastProvider({ children }) {
 	const [toasts, setToasts] = useState([]);
+
+	const keyDownHandler = useCallback(() => {
+		setToasts([]);
+	}, []);
+
+	useKeyDown('Escape', keyDownHandler);
 
 	const createToast = useCallback(
 		(message, variant) => {
@@ -22,12 +29,8 @@ function ToastProvider({ children }) {
 		[toasts]
 	);
 
-	function dismissAllToasts() {
-		setToasts([]);
-	}
-
 	const value = useMemo(() => {
-		return { toasts, createToast, dismissToast, dismissAllToasts };
+		return { toasts, createToast, dismissToast };
 	}, [toasts, createToast, dismissToast]);
 
 	return (
