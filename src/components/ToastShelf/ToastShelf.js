@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 
 import Toast from '../Toast';
 import styles from './ToastShelf.module.css';
-import { ToastContext } from '../ToastProvider';
+import { ToastContext } from '../ToastProvider/';
 
 function ToastShelf() {
 	const { toasts, dismissAllToasts } = useContext(ToastContext);
