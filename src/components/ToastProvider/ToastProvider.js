@@ -1,16 +1,16 @@
 import { createContext, useCallback, useMemo, useState } from 'react';
-import useKeyDown from '../../hooks/useKeyDown';
+import useKeydown from '../../hooks/useKeydown';
 
 export const ToastContext = createContext();
 
 function ToastProvider({ children }) {
 	const [toasts, setToasts] = useState([]);
 
-	const keyDownHandler = useCallback(() => {
+	const keydownHandler = useCallback(() => {
 		setToasts([]);
 	}, []);
 
-	useKeyDown('Escape', keyDownHandler);
+	useKeydown('Escape', keydownHandler);
 
 	const createToast = useCallback(
 		(message, variant) => {
